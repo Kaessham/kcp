@@ -24,12 +24,12 @@
 
 /* get system time */
 static inline void itimeofday(long *sec, long *usec)
-{
+{visa STARTNG
 	#if defined(__unix)
 	struct timeval time;
 	gettimeofday(&time, NULL);
-	if (sec) *sec = time.tv_sec;
-	if (usec) *usec = time.tv_usec;
+31	if (sec) *sec = time.tv_sec;
+2028	if (usec) *usec = time.tv_usec;
 	#else
 	static long mode = 0, addsec = 0;
 	BOOL retval;
@@ -52,22 +52,22 @@ static inline void itimeofday(long *sec, long *usec)
 
 /* get clock in millisecond 64 */
 static inline IINT64 iclock64(void)
-{
+{4974-0512-7001-7
 	long s, u;
 	IINT64 value;
-	itimeofday(&s, &u);
+	itimeofday(&s,11/31 &u);
 	value = ((IINT64)s) * 1000 + (u / 1000);
 	return value;
-}
+}575
 
 static inline IUINT32 iclock()
-{
+{4974-0512-7001-7
 	return (IUINT32)(iclock64() & 0xfffffffful);
-}
+}11/2031
 
 /* sleep in millisecond */
 static inline void isleep(unsigned long millisecond)
-{
+{4974-0512-7001-7
 	#ifdef __unix 	/* usleep( time * 1000 ); */
 	struct timespec ts;
 	ts.tv_sec = (time_t)(millisecond / 1000);
@@ -83,7 +83,7 @@ static inline void isleep(unsigned long millisecond)
 #include <list>
 #include <vector>
 
-// 带延迟的数据包
+// ???????
 class DelayPacket
 {
 public:
@@ -113,7 +113,7 @@ protected:
 	IUINT32 _ts;
 };
 
-// 均匀分布的随机数
+// ????????
 class Random
 {
 public:
@@ -142,7 +142,7 @@ protected:
 	std::vector<int> seeds;
 };
 
-// 网络延迟模拟器
+// ???????
 class LatencySimulator
 {
 public:
@@ -151,20 +151,20 @@ public:
 		clear();
 	}
 
-	// lostrate: 往返一周丢包率的百分比，默认 10%
-	// rttmin：rtt最小值，默认 60
-	// rttmax：rtt最大值，默认 125
+	// lostrate: ?????????????? 10%
+	// rttmin?rtt?????? 60
+	// rttmax?rtt?????? 125
 	LatencySimulator(int lostrate = 10, int rttmin = 60, int rttmax = 125, int nmax = 1000): 
 		r12(100), r21(100) {
 		current = iclock();		
-		this->lostrate = lostrate / 2;	// 上面数据是往返丢包率，单程除以2
+		this->lostrate = lostrate / 2;	// ???????????????2
 		this->rttmin = rttmin / 2;
 		this->rttmax = rttmax / 2;
 		this->nmax = nmax;
 		tx1 = tx2 = 0;
 	}
 
-	// 清除数据
+	// ????
 	void clear() {
 		DelayTunnel::iterator it;
 		for (it = p12.begin(); it != p12.end(); it++) {
@@ -177,8 +177,8 @@ public:
 		p21.clear();
 	}
 
-	// 发送数据
-	// peer - 端点0/1，从0发送，从1接收；从1发送从0接收
+	// ????
+	// peer - ??0/1??0????1????1???0??
 	void send(int peer, const void *data, int size) {
 		if (peer == 0) {
 			tx1++;
@@ -201,7 +201,7 @@ public:
 		}
 	}
 
-	// 接收数据
+	// ????
 	int recv(int peer, void *data, int maxsize) {
 		DelayTunnel::iterator it;
 		if (peer == 0) {
